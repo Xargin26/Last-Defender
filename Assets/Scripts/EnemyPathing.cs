@@ -18,18 +18,21 @@ public class EnemyPathing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transformIndex == transforms.Count - 1)
-        {
-            Destroy(gameObject);
-        }
-
+        var deltimeSpeed = moveSpeed * Time.deltaTime;
         if(transform.position == nextTranform.position)
         {
-            GetNextTranform();
+            if (transformIndex == transforms.Count - 1)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                GetNextTranform();
+            }
         }
         else
         {
-            this.transform.position = Vector3.MoveTowards(transform.position, nextTranform.position, moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, nextTranform.position, deltimeSpeed);
         }
     }
 

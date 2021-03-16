@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde4a6ee33879ff419d33a2c724b585f, type: 3}
   m_Name: WaveConfig1
   m_EditorClassIdentifier: 
-  moveSpeed: 0.01
+  moveSpeed: 3.15
   pathing: {fileID: 1311738492342577281, guid: 9bd20aedf708f1d44b5ca276d6af6863, type: 3}
   enemy: {fileID: 2914907819096450642, guid: b9f1f5069173d3d4aaf20e532642a027, type: 3}
-  buildTime: 0.558
+  buildTime: 0.75
   enemyCount: 5

@@ -7,19 +7,23 @@ public class EnemyPathing : MonoBehaviour
     List<Transform> transforms;
     int transformIndex = 0;
     [SerializeField] float moveSpeed;
-    Transform nextTranform;
 
     // Start is called before the first frame update
     void Start()
     {
-        nextTranform = transforms[0];
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         var deltimeSpeed = moveSpeed * Time.deltaTime;
-        if(transform.position == nextTranform.position)
+        if (transform.position == transforms[transformIndex].position)
         {
             if (transformIndex == transforms.Count - 1)
             {
@@ -27,19 +31,13 @@ public class EnemyPathing : MonoBehaviour
             }
             else
             {
-                GetNextTranform();
+                transformIndex++;
             }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextTranform.position, deltimeSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, transforms[transformIndex].position, deltimeSpeed);
         }
-    }
-
-    void GetNextTranform()
-    {
-        transformIndex++;
-        nextTranform = transforms[transformIndex];
     }
 
     public void SetTranforms(List<Transform> transforms)

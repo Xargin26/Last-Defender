@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         var transforms = waveConfig.GetPaths();
         var buildTime = waveConfig.GetBuildTime();
         var moveSpeed = waveConfig.GetMoveSpeed();
-        var enemy = Instantiate(enemyPerfab, transforms[0].position, Quaternion.identity);
+        var enemy = Instantiate(waveConfig.GetEnemy(), transforms[0].position, Quaternion.identity);
         var enemyPathing = enemy.GetComponent<EnemyPathing>();
         enemyPathing.SetTranforms(transforms);
         enemyPathing.SetMoveSpeed(moveSpeed);

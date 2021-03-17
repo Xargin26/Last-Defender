@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestoryBullet : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,8 +16,9 @@ public class DestoryBullet : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);
+        Destroy(gameObject);
     }
 }

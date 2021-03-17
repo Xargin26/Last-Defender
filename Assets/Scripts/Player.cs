@@ -8,12 +8,18 @@ public class Player : MonoBehaviour
     [SerializeField] float shootSpeed;
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletSpeed;
-    bool onShoot;
+    [SerializeField] float sidePadding;
+    Coroutine fireCoroutine;
+    Vector3 minSidePos;
+    Vector3 maxSidePos;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        var minPos = Camera.main.pixelRect.min;
+        var maxPos = Camera.main.pixelRect.max;
+        minSidePos = Camera.main.ScreenToWorldPoint(minPos);
+        maxSidePos = Camera.main.ScreenToWorldPoint(maxPos);
     }
 
     // Update is called once per frame
@@ -27,19 +33,18 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            onShoot = true;
-            StartCoroutine(AutoShoot());
+            fireCoroutine = StartCoroutine(AutoShoot());
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
-            onShoot = false;
+            StopCoroutine(fireCoroutine);
         }
     }
 
     private IEnumerator AutoShoot()
     {
-        while(onShoot)
+        while(true)
         {
             var newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             var rigidbody = newBullet.GetComponent<Rigidbody2D>();
@@ -54,7 +59,10 @@ public class Player : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         var verticalInput = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
 
-        Vector3 vector = new Vector3(horizontalInput, verticalInput, 0);
-        transform.position += vector;
+        var newXPos = horizontalInput + transform.position.x;
+        var newYPos = verticalInput + transform.position.y;
+        newXPos = Mathf.Clamp(newXPos, minSidePos.x + sidePadding, maxSidePos.x - sidePadding);
+        newYPos = Mathf.Clamp(newYPos, minSidePos.y + sidePadding, maxSidePos.y - sidePadding);
+        transform.position = new Vector3(newXPos, newYPos, 0);
     }
 }

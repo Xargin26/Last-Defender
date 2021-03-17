@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 515576668655313676}
   - component: {fileID: 3152880256969344767}
   - component: {fileID: 2489621474299333460}
+  - component: {fileID: 2583795269133490420}
+  - component: {fileID: -5451642987335922795}
   m_Layer: 0
   m_Name: enemyBlack1
   m_TagString: Untagged
@@ -93,5 +95,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e791b0cb2ed4da745a9143eea7bb4d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+--- !u!58 &2583795269133490420
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914907819096450642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.465
+--- !u!114 &-5451642987335922795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914907819096450642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77ce478099ebb140a7388c1358a7be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
-    List<Transform> transforms;
+    WaveConfig waveConfig;
     int transformIndex = 0;
-    [SerializeField] float moveSpeed;
+    List<Transform> transforms;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        transforms = waveConfig.GetPaths();
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class EnemyPathing : MonoBehaviour
 
     private void Move()
     {
-        var deltimeSpeed = moveSpeed * Time.deltaTime;
+        var deltimeSpeed = waveConfig.GetMoveSpeed() * Time.deltaTime;
         if (transform.position == transforms[transformIndex].position)
         {
             if (transformIndex == transforms.Count - 1)
@@ -40,13 +40,8 @@ public class EnemyPathing : MonoBehaviour
         }
     }
 
-    public void SetTranforms(List<Transform> transforms)
+    public void SetWaveConfig(WaveConfig waveConfig)
     {
-        this.transforms = transforms;
-    }
-
-    public void SetMoveSpeed(float moveSpeed)
-    {
-        this.moveSpeed = moveSpeed;
+        this.waveConfig = waveConfig;
     }
 }

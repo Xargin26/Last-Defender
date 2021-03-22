@@ -6,43 +6,35 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] WaveConfig[] waveConfigs;
+    [SerializeField] bool looping = false;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(LoopWaveConfig());
+        do
+        {
+            yield return StartCoroutine(LoopWaveConfig());
+        }
+        while (looping);
     }
 
     IEnumerator LoopWaveConfig()
     {
         for (int i = 0; i < waveConfigs.Length; i++)
         {
-            
             yield return StartCoroutine(EnemyPathing(waveConfigs[i]));
         }
     }
 
     IEnumerator EnemyPathing(WaveConfig waveConfig)
     {
-        
-        float enemyCount = waveConfig.GetEnemyCount();
-        for (int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < waveConfig.GetEnemyCount(); i++)
         {
-            yield return StartCoroutine(InstantiateEnemy(waveConfig));
+            var transforms = waveConfig.GetPaths();
+            var enemy = Instantiate(waveConfig.GetEnemy(), transforms[0].position, Quaternion.identity);
+            enemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
+            yield return new WaitForSeconds(waveConfig.GetBuildTime());
         }
-    }
-
-    IEnumerator InstantiateEnemy(WaveConfig waveConfig)
-    {
-        var enemyPerfab = waveConfig.GetEnemy();
-        var transforms = waveConfig.GetPaths();
-        var buildTime = waveConfig.GetBuildTime();
-        var moveSpeed = waveConfig.GetMoveSpeed();
-        var enemy = Instantiate(waveConfig.GetEnemy(), transforms[0].position, Quaternion.identity);
-        var enemyPathing = enemy.GetComponent<EnemyPathing>();
-        enemyPathing.SetTranforms(transforms);
-        enemyPathing.SetMoveSpeed(moveSpeed);
-        yield return new WaitForSeconds(buildTime);
     }
 
     // Update is called once per frame

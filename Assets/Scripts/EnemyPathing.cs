@@ -11,13 +11,19 @@ public class EnemyPathing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transforms = waveConfig.GetPaths();
+        if(waveConfig != null)
+        {
+            transforms = waveConfig.GetPaths();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (waveConfig != null)
+        {
+            Move();
+        }
     }
 
     private void Move()

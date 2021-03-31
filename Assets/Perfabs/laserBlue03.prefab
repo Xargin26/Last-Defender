@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8569770500217510612}
   - component: {fileID: 3129765318355215321}
   - component: {fileID: 4817890748185566422}
+  - component: {fileID: 1407123866840705600}
   m_Layer: 0
   m_Name: laserBlue03
   m_TagString: Untagged
@@ -121,3 +122,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1407123866840705600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965766824261081509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5a9468270dd2143902a327af3b7384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100

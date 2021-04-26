@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,11 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f91ea2b56a5887498251faf8211242c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 100000
   moveSpeed: 10
   shootSpeed: 0.1
-  bullet: {fileID: 6965766824261081509, guid: 8bc59ef9120c1d64597ee7d7a0f40104, type: 3}
+  bullet: {fileID: 595039232713713705, guid: 8f7a0e66878d14046baec6651ad265ad, type: 3}
   bulletSpeed: 10
+  laserSpeed: 80
+  shootPadding: 0.4
   shootSound: {fileID: 8300000, guid: b83fda026aecbf0459cd35ce114ab8db, type: 3}
   sidePadding: 0.5
 --- !u!60 &7481323171279595099
@@ -113,7 +115,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] float shootSpeed;
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletSpeed;
+    [SerializeField] float laserSpeed;
+    [SerializeField] float shootPadding;
 
     [Header("ÉùÒô")]
     [SerializeField] AudioClip shootSound;
@@ -21,6 +23,9 @@ public class Player : MonoBehaviour
     [Header("Ä£ÐÍ±ß½ç")]
     [SerializeField] float sidePadding;
 
+    SpriteRenderer laserBulletSpriteRenderer;
+    LaserBullet laserBulletScript;
+    GameObject laserBullet;
     Coroutine fireCoroutine;
     Vector3 minSidePos;
     Vector3 maxSidePos;
@@ -45,18 +50,20 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            fireCoroutine = StartCoroutine(AutoShoot());
+            //fireCoroutine = StartCoroutine(AutoShoot());
+            LaserShoot();
+            
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
-            StopCoroutine(fireCoroutine);
+            StopLaserShoot();
         }
     }
 
     private IEnumerator AutoShoot()
     {
-        while(true)
+        while (true)
         {
             var newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             var rigidbody = newBullet.GetComponent<Rigidbody2D>();
@@ -65,6 +72,23 @@ public class Player : MonoBehaviour
             AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position);
             yield return new WaitForSeconds(shootSpeed);
         }
+    }
+
+    private void LaserShoot()
+    {
+        if (laserBullet == null)
+        {
+            laserBullet = Instantiate(bullet, transform.position + new Vector3(0, shootPadding, 0), Quaternion.identity); ;
+            laserBullet.transform.parent = transform;
+            laserBulletScript = laserBullet.GetComponent<LaserBullet>();
+            laserBulletScript.Shoot();
+        }
+    }
+
+
+    private void StopLaserShoot()
+    {
+        laserBulletScript.StopShoot();
     }
 
     private void PlayerMove()
@@ -84,7 +108,7 @@ public class Player : MonoBehaviour
         var damageDealer = collision.GetComponent<DamageDealer>();
         var damage = damageDealer.GetDamage();
         hp -= damage;
-        if(hp <= 0)
+        if (hp <= 0)
         {
             Destroy(gameObject);
         }

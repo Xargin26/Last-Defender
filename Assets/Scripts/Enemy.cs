@@ -25,15 +25,9 @@ public class Enemy : MonoBehaviour
         Attack();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void GetDamage(float damageValue)
     {
-        GetDamage(collision);
-    }
-
-    private void GetDamage(Collider2D collision)
-    {
-        var damageDealer = collision.GetComponent<DamageDealer>();
-        hp -= damageDealer.GetDamage();
+        hp -= damageValue;  
         if (hp <= 0)
         {
             Dead();

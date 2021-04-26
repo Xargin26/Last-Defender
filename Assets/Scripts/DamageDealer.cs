@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] int damage = 100;
+    [SerializeField] bool isOverTime;
 
     public int GetDamage()
     {
@@ -13,12 +14,12 @@ public class DamageDealer : MonoBehaviour
 
     public void Hit()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Hit();
+        //Hit();
     }
 
     // Start is called before the first frame update
